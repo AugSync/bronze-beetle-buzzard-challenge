@@ -1,3 +1,5 @@
 import Characters from "./Characters";
+import Favorites from "./Favorites";
+import Menu from "./Menu"
 
-export { Characters };
+export { Characters, Favorites, Menu };

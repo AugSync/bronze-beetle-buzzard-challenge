@@ -1,10 +1,13 @@
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { BurgerMenu } from "../icons";
 
-export default function Header({ title }) {
+export default function Header({ title, navigation }) {
   return (
     <View style={styles.containerHeader}>
-      <TouchableOpacity style={styles.containerBurgerMenu}>
+      <TouchableOpacity
+        onPress={() => navigation.navigate("Menu")}
+        style={styles.containerBurgerMenu}
+      >
         <BurgerMenu />
       </TouchableOpacity>
       <Text style={styles.textHeader}>{title}</Text>
