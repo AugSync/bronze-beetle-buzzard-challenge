@@ -1,16 +1,44 @@
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { capitalize } from "lodash";
-import { Address, Liked } from "../icons";
+import { capitalize, some } from "lodash";
+import { useDispatch, useSelector } from "react-redux";
+import { addFavorite, removeFavorite } from "../store/slices/favorites";
+import { Address, Liked, UnLiked } from "../icons";
 import useSWR from "swr";
 import fetcher from "../utils/fetcher";
 
-export default function Character({ name, gender, birthDate, homeWorldURL }) {
+export default function Character({
+  name,
+  gender,
+  birthDate,
+  homeWorldURL,
+  url,
+}) {
+  const favorites = useSelector((state) => state.favorites.favorites);
+  const dispatch = useDispatch();
+
   const { data, error } = useSWR(homeWorldURL, fetcher);
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.likeContainer}>
-        <Liked />
+      <TouchableOpacity
+        style={styles.likeContainer}
+        disabled={!data}
+        onPress={() =>
+          some(favorites, ["url", url])
+            ? dispatch(removeFavorite({ url }))
+            : dispatch(
+                addFavorite({
+                  name,
+                  gender,
+                  birthDate,
+                  homeWorldURL,
+                  homeWorldName: data.name,
+                  url,
+                })
+              )
+        }
+      >
+        {some(favorites, ["url", url]) ? <Liked /> : <UnLiked />}
       </TouchableOpacity>
       <Text style={styles.textName}>{name}</Text>
       <Text style={styles.textDescription}>{`${capitalize(
