@@ -1,19 +1,28 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { capitalize } from "lodash";
 import { Address, Liked } from "../icons";
+import useSWR from "swr";
+import fetcher from "../utils/fetcher";
 
-export default function Character({ name, gender, birthDate, address }) {
+export default function Character({ name, gender, birthDate, homeWorldURL }) {
+  const { data, error } = useSWR(homeWorldURL, fetcher);
+
+  if (error) return <Text style={styles.textError}>Failed to load</Text>;
+
   return (
     <View style={styles.container}>
-      <View style={styles.likeContainer}>
+      <TouchableOpacity style={styles.likeContainer}>
         <Liked />
-      </View>
+      </TouchableOpacity>
       <Text style={styles.textName}>{name}</Text>
-      <Text style={styles.textDescription}>{`${gender} | ${birthDate}`}</Text>
+      <Text style={styles.textDescription}>{`${capitalize(
+        gender
+      )} | ${birthDate}`}</Text>
       <View style={styles.addressContainer}>
         <View style={styles.addressIconContainer}>
           <Address />
         </View>
-        <Text style={styles.textName}>{address}</Text>
+        <Text style={styles.textName}>{data ? data.name : "Loading..."}</Text>
       </View>
       <View style={styles.divider} />
     </View>
@@ -22,9 +31,14 @@ export default function Character({ name, gender, birthDate, address }) {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 31,
+    marginTop: 17,
     alignItems: "flex-start",
     position: "relative",
+  },
+  textError: {
+    color: "rgba(255, 255, 255, 0.7);",
+    fontFamily: "Urbanist-Regular",
+    fontSize: 13,
   },
   textName: {
     color: "#fff",
