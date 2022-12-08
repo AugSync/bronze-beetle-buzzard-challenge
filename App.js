@@ -1,20 +1,25 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { useFonts } from "expo-font";
+import { NativeRouter, Route, Routes } from "react-router-native";
+import { Characters } from "./screens";
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    "Urbanist-Regular": require("./assets/fonts/Urbanist-Regular.ttf"),
+    "Urbanist-SemiBold": require("./assets/fonts/Urbanist-SemiBold.ttf"),
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NativeRouter>
+      <StatusBar style="light" />
+
+      <Routes>
+        <Route path="/" element={<Characters />} />
+      </Routes>
+    </NativeRouter>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
