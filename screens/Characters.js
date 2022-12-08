@@ -1,4 +1,4 @@
-import { StyleSheet, Text, FlatList } from "react-native";
+import { StyleSheet, Text, FlatList, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Header, Character } from "../components";
 import useSWR from "swr";
@@ -12,19 +12,22 @@ export default function Characters() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header title="Characters" />
-      <FlatList
-        data={data.results}
-        renderItem={({ item: { name, gender, birth_year, homeworld } }) => (
-          <Character
-            name={name}
-            gender={gender}
-            birthDate={birth_year}
-            homeWorldURL={homeworld}
-          />
-        )}
-        keyExtractor={(item) => item.url}
-      />
+      <View style={styles.content}>
+        <Header title="Characters" />
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          data={data.results}
+          renderItem={({ item: { name, gender, birth_year, homeworld } }) => (
+            <Character
+              name={name}
+              gender={gender}
+              birthDate={birth_year}
+              homeWorldURL={homeworld}
+            />
+          )}
+          keyExtractor={(item) => item.url}
+        />
+      </View>
     </SafeAreaView>
   );
 }
@@ -34,6 +37,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#17141F",
     padding: 17,
+    alignItems: "center",
+  },
+  content: {
+    width: "100%",
+    maxWidth: 550,
+    flex: 1,
   },
   textError: {
     color: "rgba(255, 255, 255, 0.7);",
