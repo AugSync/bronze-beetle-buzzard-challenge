@@ -1,7 +1,10 @@
 import { StatusBar } from "expo-status-bar";
 import { useFonts } from "expo-font";
-import { NativeRouter, Route, Routes } from "react-router-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Characters } from "./screens";
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -14,12 +17,17 @@ export default function App() {
   }
 
   return (
-    <NativeRouter>
+    <NavigationContainer>
       <StatusBar style="light" />
 
-      <Routes>
-        <Route path="/" element={<Characters />} />
-      </Routes>
-    </NativeRouter>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}
+        initialRouteName="Characters"
+      >
+        <Stack.Screen name="Characters" component={Characters} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
