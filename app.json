@@ -28,6 +28,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "6804ce7e-7d56-42c4-99d2-54dd7e3122f8"
+      }
+    },
+    "owner": "augsync"
   }
 }
