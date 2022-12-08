@@ -7,8 +7,6 @@ import fetcher from "../utils/fetcher";
 export default function Character({ name, gender, birthDate, homeWorldURL }) {
   const { data, error } = useSWR(homeWorldURL, fetcher);
 
-  if (error) return <Text style={styles.textError}>Failed to load</Text>;
-
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.likeContainer}>
@@ -22,7 +20,11 @@ export default function Character({ name, gender, birthDate, homeWorldURL }) {
         <View style={styles.addressIconContainer}>
           <Address />
         </View>
-        <Text style={styles.textName}>{data ? data.name : "Loading..."}</Text>
+        {error ? (
+          <Text style={styles.textName}>Failed to load</Text>
+        ) : (
+          <Text style={styles.textName}>{data ? data.name : "Loading..."}</Text>
+        )}
       </View>
       <View style={styles.divider} />
     </View>
