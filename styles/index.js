@@ -17,7 +17,6 @@ const styles = StyleSheet.create({
     color: "rgba(255, 255, 255, 0.7);",
     fontFamily: "Urbanist-Regular",
     fontSize: 13,
-    marginTop: 30,
   },
 });
 
