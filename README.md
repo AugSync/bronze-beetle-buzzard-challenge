@@ -1,5 +1,33 @@
 # bronze-beetle-buzzard-challenge
 
+## Run project
+
+Install dependencies
+
+```bash
+yarn
+```
+
+Run project
+
+### Web
+
+```bash
+yarn web
+```
+
+### Android
+
+```bash
+yarn android
+```
+
+### IOs
+
+```bash
+yarn ios
+```
+
 ## Install preview APK
 
 ```
@@ -25,7 +53,7 @@
   █ █   █ █▄ ▀█▄ ▄█▀█▄▄▀ ▀ ▀▀ ▀▄     ▄▄▄▄▀▀ █
   █ █▄▄▄█ █▀███▀▄██▄  █▀▀█  ▄▀ █▀▄▄▀ ▀▄▀▄█▀ █
   █▄▄▄▄▄▄▄█▄█▄▄▄██▄▄▄█▄▄▄▄▄▄█▄▄▄▄█▄▄▄▄▄█▄█▄██
-  
+
 ```
 
 🤖 Open this link on your Android devices (or scan the QR code) to install the app:
